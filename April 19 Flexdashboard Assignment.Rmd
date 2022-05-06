@@ -62,13 +62,13 @@ ggplot(Credit_Repair_Complaints) +
   scale_y_continuous(name = "Number of Complaints")
 ```
 
-### Chart C
+### Complaints Per Credit Car Provider, 2020
 
 ```{r}
 Credit_Card_Violators <- cfpb_complaints %>%
   filter(product == "Credit card or prepaid card") %>%
   group_by(company) %>%
-  mutate(count = n())
+  mutate(count = n()) %>%
 
 ggplot(Credit_Card_Violators) +
   geom_col(aes(x = company, y = count)) +
