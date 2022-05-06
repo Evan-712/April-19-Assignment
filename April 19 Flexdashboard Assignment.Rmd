@@ -1,0 +1,78 @@
+---
+title: "April 19 Flexdashboard Assignment"
+output:  
+  flexdashboard::flex_dashboard:
+    orientation: rows
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(lubridate)
+library(janitor)
+library(glue)
+library(plotly)
+library(DT)
+library(kableExtra)
+library(leaflet)
+library(RColorBrewer)
+library(htmlwidgets)
+library(htmltools)
+library(tigris)
+library(scales)
+options(tigris_class = "sf")
+
+cfpb_complaints <- readRDS(url("https://github.com/Evan-712/April-19-Assignment/blob/main/complaints.rds?raw=true"))
+```
+
+---
+    
+Row
+-------------------------------------
+
+### Number of Complaints Per Type of Product, 2020
+
+```{r}
+commonproducts <- cfpb_complaints %>% 
+  group_by(product) %>%
+  mutate(count = n())
+
+ggplot(commonproducts) +
+  geom_col(aes(x = product, y = count, fill = product)) +
+  scale_x_discrete(name = "Type of product") +
+  scale_y_continuous(name = "Number of complaints")
+```
+
+
+Row
+-------------------------------------
+
+### Number of Complaints for Credit Cards Per Type of Sub-Product, 2020
+
+```{r}
+Credit_Repair_Complaints <- cfpb_complaints %>% 
+  filter(product == "Credit card or prepaid card") %>%
+  group_by(sub_product) %>%
+  mutate(count = n())
+
+ggplot(Credit_Repair_Complaints) +
+  geom_col(aes(x = sub_product, y = count, fill = sub_product)) +
+  scale_x_discrete(name = "Sub-Products") +
+  scale_y_continuous(name = "Number of Complaints")
+```
+
+### Chart C
+
+```{r}
+Credit_Card_Violators <- cfpb_complaints %>%
+  filter(product == "Credit card or prepaid card") %>%
+  group_by(company) %>%
+  mutate(count = n())
+
+ggplot(Credit_Card_Violators) +
+  geom_col(aes(x = company, y = count)) +
+  scale_x_discrete(name = "Company") +
+  scale_y_continuous(name = "Number of Complaints")
+```
+

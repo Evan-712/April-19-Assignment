@@ -62,7 +62,3 @@ count(Credit_Card_Violators) %>%
 
 Compared with other analysis this far, there is no discernible outlier within this data, with five companies (Citibank, Capital One Financial Corporation, JPMorgan Chase & Co., Bank of America, and Synchrony Financial) receiving over 2,000 complaints and nine other companies (U.S. Bancorp, American Express Company, Alliance Data Card Services, Discover Bank, Barclay's Bank, Xerox, Wells Fargo & Company, Comerica, and TD Bank) receiving over 500 complaints from consumers each.
 
-```{r, echo=FALSE}
-
-```
-
