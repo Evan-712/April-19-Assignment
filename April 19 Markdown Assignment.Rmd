@@ -32,7 +32,8 @@ cfpb_complaints <- readRDS(url("https://github.com/Evan-712/April-19-Assignment/
 commonproducts <- cfpb_complaints %>% 
   group_by(product)
 
-count(commonproducts)
+count(commonproducts) %>%
+  arrange(desc(n))
   
 ```
 
@@ -43,10 +44,23 @@ Credit_Repair_Complaints <- cfpb_complaints %>%
   filter(product == "Credit card or prepaid card") %>%
   group_by(sub_product)
 
-count(Credit_Repair_Complaints)
+count(Credit_Repair_Complaints) %>%
+  arrange(desc(n))
 ```
 
 Dissecting this data further, we can see how consumer complaints most commonly result from complaints over their "general-purpose credit card or charge card," in other words, standard credit cards. The prominence of complaints in this category, again, factor into more complaints than the other sub-product categories combined at 20,329 complaints, though there are significant complaints with the use of store credit cards (3,853), government benefit cards (3357), and general-purpose prepaid cards (1,388).
+
+```{r}
+Credit_Card_Violators <- cfpb_complaints %>%
+  filter(product == "Credit card or prepaid card") %>%
+  group_by(company)
+
+count(Credit_Card_Violators) %>%
+  arrange(desc(n))
+
+```
+
+Compared with other analysis this far, there is no discernible outlier within this data, with five companies (Citibank, Capital One Financial Corporation, JPMorgan Chase & Co., Bank of America, and Synchrony Financial) receiving over 2,000 complaints and nine other companies (U.S. Bancorp, American Express Company, Alliance Data Card Services, Discover Bank, Barclay's Bank, Xerox, Wells Fargo & Company, Comerica, and TD Bank) receiving over 500 complaints from consumers each.
 
 ```{r, echo=FALSE}
 

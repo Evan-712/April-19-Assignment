@@ -392,7 +392,61 @@ far, are those classified under “Credit reporting, credit repair
 services, or other personal consumer reports” with 255,748 complaints.
 The next two categories, “Debt collection” (46,088), “Credit card or
 prepaid card” (29,128), and “Mortgage” (20,940) don’t have close to as
-many complaints.</p>
+many complaints. With such a significant extrapolation from this data,
+it is vital to investigate this sector further.</p>
+<pre class="r"><code>Credit_Repair_Complaints &lt;- cfpb_complaints %&gt;% 
+  filter(product == &quot;Credit card or prepaid card&quot;) %&gt;%
+  group_by(sub_product)
+
+count(Credit_Repair_Complaints)</code></pre>
+<pre><code>## # A tibble: 7 x 2
+## # Groups:   sub_product [7]
+##   sub_product                                    n
+##   &lt;chr&gt;                                      &lt;int&gt;
+## 1 General-purpose credit card or charge card 20329
+## 2 General-purpose prepaid card                1388
+## 3 Gift card                                     74
+## 4 Government benefit card                     3357
+## 5 Payroll card                                 120
+## 6 Store credit card                           3853
+## 7 Student prepaid card                           7</code></pre>
+<p>Dissecting this data further, we can see how consumer complaints most
+commonly result from complaints over their “general-purpose credit card
+or charge card,” in other words, standard credit cards. The prominence
+of complaints in this category, again, factor into more complaints than
+the other sub-product categories combined at 20,329 complaints, though
+there are significant complaints with the use of store credit cards
+(3,853), government benefit cards (3357), and general-purpose prepaid
+cards (1,388).</p>
+<pre class="r"><code>Credit_Card_Violators &lt;- cfpb_complaints %&gt;%
+  filter(product == &quot;Credit card or prepaid card&quot;) %&gt;%
+  group_by(company)
+
+count(Credit_Card_Violators) %&gt;%
+  arrange(desc(n))</code></pre>
+<pre><code>## # A tibble: 279 x 2
+## # Groups:   company [279]
+##    company                                   n
+##    &lt;chr&gt;                                 &lt;int&gt;
+##  1 CITIBANK, N.A.                         4158
+##  2 CAPITAL ONE FINANCIAL CORPORATION      3821
+##  3 JPMORGAN CHASE &amp; CO.                   2658
+##  4 BANK OF AMERICA, NATIONAL ASSOCIATION  2361
+##  5 SYNCHRONY FINANCIAL                    2209
+##  6 U.S. BANCORP                           1906
+##  7 AMERICAN EXPRESS COMPANY               1787
+##  8 Alliance Data Card Services            1267
+##  9 DISCOVER BANK                          1078
+## 10 BARCLAYS BANK DELAWARE                  998
+## # ... with 269 more rows</code></pre>
+<p>Compared with other analysis this far, there is no discernible
+outlier within this data, with five companies (Citibank, Capital One
+Financial Corporation, JPMorgan Chase &amp; Co., Bank of America, and
+Synchrony Financial) receiving over 2,000 complaints and nine other
+companies (U.S. Bancorp, American Express Company, Alliance Data Card
+Services, Discover Bank, Barclay’s Bank, Xerox, Wells Fargo &amp;
+Company, Comerica, and TD Bank) receiving over 500 complaints from
+consumers each.</p>
 
 
 
