@@ -1,0 +1,50 @@
+---
+title: "April 19 Markdown Assignment"
+author: "Evan LaPorte"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(lubridate)
+library(janitor)
+library(glue)
+library(plotly)
+library(DT)
+library(kableExtra)
+library(leaflet)
+library(RColorBrewer)
+library(htmlwidgets)
+library(htmltools)
+library(tigris)
+library(scales)
+options(tigris_class = "sf")
+
+cfpb_complaints <- readRDS(url("https://github.com/Evan-712/April-19-Assignment/blob/main/complaints.rds?raw=true"))
+
+```
+
+
+
+```{r}
+commonproducts <- cfpb_complaints %>% 
+  group_by(product)
+
+count(commonproducts)
+
+
+  
+```
+
+```{r}
+
+```
+
+
+
+```{r, echo=FALSE}
+
+```
+
