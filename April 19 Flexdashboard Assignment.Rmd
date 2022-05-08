@@ -1,5 +1,7 @@
 ---
 title: "April 19 Flexdashboard Assignment"
+author: "Evan LaPorte"
+date: "`r Sys.Date()`"
 output:  
   flexdashboard::flex_dashboard:
     orientation: rows
@@ -7,7 +9,6 @@ output:
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
-knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(lubridate)
 library(janitor)
@@ -24,7 +25,9 @@ library(scales)
 options(tigris_class = "sf")
 
 cfpb_complaints <- readRDS(url("https://github.com/Evan-712/April-19-Assignment/blob/main/complaints.rds?raw=true"))
+
 ```
+
 
 ---
     
@@ -62,17 +65,16 @@ ggplot(Credit_Repair_Complaints) +
   scale_y_continuous(name = "Number of Complaints")
 ```
 
-### Complaints Per Credit Car Provider, 2020
+### Complaints Per Credit Card Provider, 2020
 
 ```{r}
-Credit_Card_Violators <- cfpb_complaints %>%
+Credit_Card_Companies <- cfpb_complaints %>%
   filter(product == "Credit card or prepaid card") %>%
   group_by(company) %>%
-  mutate(count = n()) %>%
+  mutate(count = n())
 
-ggplot(Credit_Card_Violators) +
+ggplot(Credit_Card_Companies) +
   geom_col(aes(x = company, y = count)) +
-  scale_x_discrete(name = "Company") +
-  scale_y_continuous(name = "Number of Complaints")
-```
+  scale_x_discrete(name = "Credit Card Providers") +
+  scale_y_continuous(name = "Complaints Per Provider") 
 
