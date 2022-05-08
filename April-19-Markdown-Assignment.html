@@ -11,7 +11,7 @@
 
 <meta name="author" content="Evan LaPorte" />
 
-<meta name="date" content="2022-05-06" />
+<meta name="date" content="2022-05-08" />
 
 <title>April 19 Markdown Assignment</title>
 
@@ -365,7 +365,7 @@ pre code {
 
 <h1 class="title toc-ignore">April 19 Markdown Assignment</h1>
 <h4 class="author">Evan LaPorte</h4>
-<h4 class="date">2022-05-06</h4>
+<h4 class="date">2022-05-08</h4>
 
 </div>
 
@@ -373,20 +373,21 @@ pre code {
 <pre class="r"><code>commonproducts &lt;- cfpb_complaints %&gt;% 
   group_by(product)
 
-count(commonproducts)</code></pre>
+count(commonproducts) %&gt;%
+  arrange(desc(n))</code></pre>
 <pre><code>## # A tibble: 9 x 2
 ## # Groups:   product [9]
 ##   product                                                                      n
 ##   &lt;chr&gt;                                                                    &lt;int&gt;
-## 1 Checking or savings account                                              20679
-## 2 Credit card or prepaid card                                              29128
-## 3 Credit reporting, credit repair services, or other personal consumer r~ 255748
-## 4 Debt collection                                                          46088
-## 5 Money transfer, virtual currency, or money service                        7502
-## 6 Mortgage                                                                 20940
-## 7 Payday loan, title loan, or personal loan                                 3545
-## 8 Student loan                                                              3360
-## 9 Vehicle loan or lease                                                     6060</code></pre>
+## 1 Credit reporting, credit repair services, or other personal consumer r~ 255748
+## 2 Debt collection                                                          46088
+## 3 Credit card or prepaid card                                              29128
+## 4 Mortgage                                                                 20940
+## 5 Checking or savings account                                              20679
+## 6 Money transfer, virtual currency, or money service                        7502
+## 7 Vehicle loan or lease                                                     6060
+## 8 Payday loan, title loan, or personal loan                                 3545
+## 9 Student loan                                                              3360</code></pre>
 <p>As seen with this data, the most common products with complaints, by
 far, are those classified under “Credit reporting, credit repair
 services, or other personal consumer reports” with 255,748 complaints.
@@ -398,17 +399,18 @@ it is vital to investigate this sector further.</p>
   filter(product == &quot;Credit card or prepaid card&quot;) %&gt;%
   group_by(sub_product)
 
-count(Credit_Repair_Complaints)</code></pre>
+count(Credit_Repair_Complaints) %&gt;%
+  arrange(desc(n))</code></pre>
 <pre><code>## # A tibble: 7 x 2
 ## # Groups:   sub_product [7]
 ##   sub_product                                    n
 ##   &lt;chr&gt;                                      &lt;int&gt;
 ## 1 General-purpose credit card or charge card 20329
-## 2 General-purpose prepaid card                1388
-## 3 Gift card                                     74
-## 4 Government benefit card                     3357
+## 2 Store credit card                           3853
+## 3 Government benefit card                     3357
+## 4 General-purpose prepaid card                1388
 ## 5 Payroll card                                 120
-## 6 Store credit card                           3853
+## 6 Gift card                                     74
 ## 7 Student prepaid card                           7</code></pre>
 <p>Dissecting this data further, we can see how consumer complaints most
 commonly result from complaints over their “general-purpose credit card
